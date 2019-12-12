@@ -1,5 +1,5 @@
 <div class='form-container'>
-    <input (keyup)="onChangeTextTitle($event.target.value)" [(value)]="textInput"  maxlength="35" [className]="neonColorClass + ' dynamicNeonTitle ' + neonTypoClass "
+    <input autocomplete="off" (keyup)="onChangeTextTitle($event.target.value)" [(value)]="textInput"  maxlength="35" [className]="neonColorClass + ' dynamicNeonTitle ' + neonTypoClass "
      style="align-self: center; text-align: center; letter-spacing: 2px;"  *ngIf="userChoices[0] === 'text' && userChoices[3] === 'typo' " >
         <!-- <h2   [className]="neonColorClass + ' ' + neonTypoClass " style="align-self: center; text-align: center; letter-spacing: 2px; width: 100%;" >{{textInput}}</h2> -->
   
@@ -24,7 +24,7 @@
             <div class="neon-wizard-header">
               <h5>Ecrivez votre texte</h5>
             </div>
-            <input file='text' (keyup)="onChangeTextTitle($event.target.value)" placeholder="Texte" maxlength="35" [(value)]="textInput"
+            <input autocomplete="off" file='text' (keyup)="onChangeTextTitle($event.target.value)" placeholder="" maxlength="35" [(value)]="textInput"
               class="basic-input-text mb5  mt5" />
   
           </div>
@@ -32,7 +32,7 @@
             <div class="neon-wizard-header">
               <h5>Importer votre image</h5>
             </div>
-            <input (change)="onSelectFile($event)"  type="file"   class="basic-input-form"/>
+            <input autocomplete="off" (change)="onSelectFile($event)"  type="file"   class="basic-input-form"/>
   <!-- 
             <div   class="money">
                 <input (change)="onSelectFile($event)" type="text" class="numberOnly" autocomplete="off" maxlength="8" /><div>$</div>                      
@@ -83,68 +83,12 @@
                                   </div>
                                 </div>
   
-  <!-- 
-                                <ng-template #slide let-slide>
-                                    <div [ngStyle]="{
-                                        'background-size': 'cover',
-                                        'background-image': 'url(' + slide.url + ')',
-                                        'background-repeat': 'no-repeat',
-                                        'width': '100%',
-                                        'height': '100%'
-                                      }">
-                                    </div>
-                                  </ng-template>
-                                  <ng-template #thumbnail let-slide>
-                                      <div [ngStyle]="{
-                                          'background-size': 'cover',
-                                          'background-image': 'url(' + slide.url + ')',
-                                          'background-repeat': 'no-repeat',
-                                          'background-position': 'center center',
-                                          'width': '100%',
-                                          'height': '100%'
-                                        }"></div>
-                                  </ng-template> -->
+
           </div>
-          <!-- <div class='item-container npb'>
-                    <div class="neon-wizard-header"><h4>Choisissez votre format</h4></div>
-                    <div class="row">
-                        <label><input type="checkbox" class="ios-switch"  /><div><div></div></div></label>
-                        <span class="tailleperso">Taille personalisée</span>
-                    </div>
-          
-        
-                </div>   -->
-  
-  
-          <!-- <div class='item-container npt npb  row'> -->
-  
-  
-          <!-- <div class="size-container row">
-                         <div  class="circle-cont col" (click)="selectedFormatSize = i" *ngFor="let format of formatSizes;  let i = index"   >
-                            <div [ngClass]="{'circle yellow-selected': selectedFormatSize===i, 'circle':selectedFormatSize!=='2' }">{{format.size}}</div>
-                            
-                         <div class=format-subtitle>{{format.width}}</div> 
-                         </div>
-        
-                      </div></div> -->
-  
-          <!-- 
-                <div class='item-container npt npb'>
-                    <div class="neon-wizard-header"><h4>Choisissez votre support</h4></div>
-                  <div class="form-style-container-small">    
-                      <div (click)="imageSupportSelected = 1" [ngClass]="{'style-item-small yellow-selected': imageSupportSelected===1, 'style-item-small':imageSupportSelected!=='2' }" >
-                            
-                            <span  style='position: relative; top: 40%'>Image support Standard</span>
-                      </div>
-                      <div (click)="imageSupportSelected = 2" [ngClass]="{'style-item-small yellow-selected': imageSupportSelected===2, 'style-item-small':imageSupportSelected  !=='1' }"  >
-                           
-                            <span  style='position: relative; top: 40%'> Image support detournée</span>
-                      </div>
-                  </div>  
-              </div> -->
+       
           <div class="neon-wizard-btn-container row ">
-            <button class="prev-btn col-md-3 col-sm-12" type="button" (click)="onCompleteStep(3, 'erase', null)" awPreviousStep>Précedent</button>
-            <button class="next-btn col-md-3 col-sm-12" type="button" awNextStep>Suivant</button>
+            <button class="prev-btn col-md-3 col-sm-12" type="button" (click)="onCompleteStep(3, 'erase', null)"  awPreviousStep>Précedent</button>
+            <button [ngClass]="!selectedTypo? 'next-btn col-md-3 col-sm-12 disabled' : 'next-btn col-md-3 col-sm-12'"  type="button"  [disabled]="!selectedTypo"  awNextStep>Suivant</button>
           </div>
   
         </aw-wizard-step>
@@ -201,7 +145,7 @@
           <div class="row ">
               <div  class='sizeName  col-3'
               *ngFor="let format of formatSizes;  let i = index">
-             {{format.width}} cm
+             {{format?.width}} cm
     
     
               <!-- <div class=format-subtitle>{{format.width}}</div>  -->
@@ -210,7 +154,7 @@
           </div>
           <div class="neon-wizard-btn-container mt5 row flex1 pb5">
             <button class="prev-btn col-md-3 col-sm-12" type="button" awPreviousStep>Précedent</button>
-            <button class="next-btn col-md-3 col-sm-12" type="button" awNextStep>Suivant</button>
+            <button  [ngClass]="!selectedFormatSize? 'next-btn col-md-3 col-sm-12 disabled' : 'next-btn col-md-3 col-sm-12'"  type="button" [disabled]="!selectedFormatSize"  awNextStep>Suivant</button>
           </div>
   
         </aw-wizard-step>
@@ -233,7 +177,7 @@
           </div>
           <div class="neon-wizard-btn-container mt5 row">
             <button class="prev-btn  col-md-3 col-sm-12" type="button" awPreviousStep>Précedent</button>
-            <button class="next-btn  col-md-3 col-sm-12" type="button" (click)="onCompleteStep(4, imageSupportSelected, null)"  awNextStep>Suivant</button>
+            <button [ngClass]="!imageSupportSelected? 'next-btn col-md-3 col-sm-12 disabled' : 'next-btn col-md-3 col-sm-12'" type="button" [disabled]="!imageSupportSelected" (click)="onCompleteStep(4, imageSupportSelected, null)"  awNextStep>Suivant</button>
   
           </div>
   
@@ -253,7 +197,7 @@
   
           <div class="neon-wizard-btn-container row">
             <button class="prev-btn  col-md-3 col-sm-12" type="button" awPreviousStep>Précedent</button>
-            <button class="next-btn  col-md-3 col-sm-12" type="button" awNextStep>Suivant</button>
+            <button  [ngClass]="!projectType? 'next-btn col-md-3 col-sm-12 disabled' : 'next-btn col-md-3 col-sm-12'"  [disabled]="!projectType"  class="next-btn  col-md-3 col-sm-12" type="button" awNextStep>Suivant</button>
           </div>
         </aw-wizard-step>
   
@@ -272,14 +216,14 @@
   
               <div *ngIf="signUp" class='user-info-row-cont nestedInput'>
                 <span class="user-info-row-title">Prénom</span>
-                <input (change)="onChangeUserInfo('nickname', $event.target.value)"
+                <input autocomplete="off" (change)="onChangeUserInfo('nickname', $event.target.value)"
                   [value]="userInfoPerso['nickname'] || ''" class="basic-input smallHeight " />
               </div>
   
   
               <div *ngIf="signUp" class='user-info-row-cont nestedInput'>
                 <span class="user-info-row-title">Nom</span>
-                <input (change)="onChangeUserInfo('name', $event.target.value)" [value]="userInfoPerso['name'] || ''"
+                <input autocomplete="off" (change)="onChangeUserInfo('name', $event.target.value)" [value]="userInfoPerso['name'] || ''"
                   class="basic-input smallHeight " />
               </div>
   
@@ -288,7 +232,7 @@
   
             <div class='user-info-row-cont'>
               <span class="user-info-row-title">Adresse mail</span>
-              <input (change)="onChangeUserInfo('email', $event.target.value)" [value]="userInfoPerso['email'] || ''"
+              <input autocomplete="off" (change)="onChangeUserInfo('email', $event.target.value)" [value]="userInfoPerso['email'] || ''"
                 class="basic-input smallHeight " />
   
             </div>
@@ -296,7 +240,7 @@
   
             <div class='user-info-row-cont'>
               <span class="user-info-row-title">Mot de passe</span>
-              <input type="password" (change)="onChangeUserInfo('password', $event.target.value)"
+              <input autocomplete="off" type="password" (change)="onChangeUserInfo('password', $event.target.value)"
                 [value]="userInfoPerso['password'] || ''" class="basic-input smallHeight mb3 " />
               <span class='user-info-row-title textcenter'>En cliquant sur "envoyer" vous acceptez les <a
                   href="#">Conditions g énérales d'utilisation</a></span>
@@ -310,7 +254,7 @@
             </div>
   
             <div class="row toggleCont">
-              <label><input (change)="signuptrue()" type="checkbox" class="ios-switch" />
+              <label><input  autocomplete="off" (change)="signuptrue()" type="checkbox" class="ios-switch" />
                 <div>
                   <div></div>
                 </div>
@@ -326,7 +270,7 @@
             <h5 class="neon-wizard-header ">Obtenez votre devis gratuit</h5>
             <div class='user-info-row-cont'>
               <span class="user-info-row-title">Société</span>
-              <input (change)="onChangeUserInfo('société', $event.target.value)" [value]="userInfoPerso['société'] || ''"
+              <input  autocomplete="off" type="text" (change)="onChangeUserInfo('société', $event.target.value)" [value]="userInfoPerso['société'] || ''"
                 class="basic-input smallHeight mb3 " />
             </div>
   
@@ -334,14 +278,14 @@
   
               <div class='user-info-row-cont nestedInput'>
                 <span class="user-info-row-title">Prénom</span>
-                <input (change)="onChangeUserInfo('nickname', $event.target.value)"
+                <input autocomplete="off" type="text" (change)="onChangeUserInfo('nickname', $event.target.value)"
                   [value]="userInfoPerso['nickname'] || ''" class="basic-input smallHeight " />
               </div>
   
   
               <div class='user-info-row-cont nestedInput'>
                 <span class="user-info-row-title">Nom</span>
-                <input (change)="onChangeUserInfo('name', $event.target.value)" [value]="userInfoPerso['name'] || ''"
+                <input autocomplete="off"  type="text" (change)="onChangeUserInfo('name', $event.target.value)" [value]="userInfoPerso['name'] || ''"
                   class="basic-input smallHeight " />
               </div>
   
@@ -349,7 +293,14 @@
   
             <div class='user-info-row-cont'>
               <span class="user-info-row-title">Adresse mail</span>
-              <input (change)="onChangeUserInfo('email', $event.target.value)" [value]="userInfoPerso['email'] || ''"
+              <input autocomplete="off" type="email" (change)="onChangeUserInfo('email', $event.target.value)" [value]="userInfoPerso['email'] || ''"
+                class="basic-input smallHeight " />
+  
+            </div>
+
+            <div class='user-info-row-cont'>
+              <span class="user-info-row-title">Mot de passe</span>
+              <input autocomplete="off" type="password" (change)="onChangeUserInfo('password', $event.target.value)" [value]="userInfoPerso['password'] || ''"
                 class="basic-input smallHeight " />
   
             </div>
@@ -385,7 +336,7 @@
         <div>
           <a href="#" title="Close" class="modal-close">Close</a>
           <h1>Récapitulatif de votre demande: </h1>
-          <div style="height: 220px;">
+          <div style="height: 300px;">
   
             <table>
               <thead>
@@ -395,25 +346,25 @@
                 <tr>
                   <td style="font-family: Mukta-Bold;" data-column="">
                     {{mainChoice === 'text' ? 'Texte' :' Fichier img'}}</td>
-                  <td style="font-family: Mukta-Regular;" data-column="Etat">{{textInput}}</td>
+                  <td style="font-family: Mukta-Regular;" data-column="Etat">{{textInput  | titlecase}}</td>
                 </tr>
                 <tr>
                   <td style="font-family: Mukta-Bold;" data-column="">Typographie</td>
-                  <td style="font-family: Mukta-Regular;" data-column="Etat">{{styleSelected}}</td>
+                  <td style="font-family: Mukta-Regular;" data-column="Etat">{{selectedTypo  | titlecase}}</td>
                 </tr>
                 <tr >
                     <td  style="font-family: Mukta-Bold;" data-column="">Couleurs</td>
-                    <td style="font-family: Mukta-Regular;" data-column="Etat">{{selectedColor}}</td>
+                    <td style="font-family: Mukta-Regular;" data-column="Etat">{{selectedColor  | titlecase}}</td>
                   </tr>
-                <tr>
+                <tr *ngIf="formatSizes[selectedFormatSize]">
                   <td style="font-family: Mukta-Bold;" data-column="">Hauteur</td>
-                  <td style="font-family: Mukta-Regular;" data-column="Etat">{{formatSizes[selectedFormatSize].width}} cm
+                  <td style="font-family: Mukta-Regular;" data-column="Etat">{{formatSizes[selectedFormatSize].width }} cm
                   </td>
                 </tr>
                 <tr >
                     <td  style="font-family: Mukta-Bold;" data-column="
                     ">Support</td>
-                    <td style="font-family: Mukta-Regular;" data-column="Etat">{{imageSupportSelected}}</td>
+                    <td style="font-family: Mukta-Regular;" data-column="Etat">{{imageSupportSelected  | titlecase}}</td>
                   </tr>
                 <tr>
     

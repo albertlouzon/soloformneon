@@ -50,15 +50,15 @@ export class NeonFormComponent implements OnInit {
   {size: 'M', width: 25, url: '../.././assets/Fichier-M.png'},
   {size: 'L', width: 30, url: '../.././assets/Fichier-L.png'},
   {size: 'XL', width: 40, url: '../.././assets/Fichier-XL.png'} ];
-  selectedFormatSize = 0;
-  imageSupportSelected = 'standard';
-  projectType = 'consumer';
+  selectedFormatSize = null;
+  imageSupportSelected = null;
+  projectType = null;
   userChoices = {};
   userInfoPerso  =  {};
   trim = String.prototype.trim;
   suceMaBite = ' créant votre espace !';
   signUp = true;
-  styleSelected = 1;
+  styleSelected = null;
   signUpError = 'Il existe déjà un compte avec cet email...';
   loginFailed = false;
   textInput = '';
@@ -71,7 +71,7 @@ export class NeonFormComponent implements OnInit {
   loading = false;
   mainChoice = '';
   imageAdditionalInfo = '';
-  selectedColorUI = 0;
+  selectedColorUI = null;
   allUsers = [];
   closeResult: string;
   colorTitle = 'Choisissez une couleur';
@@ -345,7 +345,6 @@ onSelectColor(color, index) {
                 if (err.status === 201 || err.status === 200 )  {
                   console.log('debu 6');
 
-                  alert('User sucessfully created !!! On va te faire visiter ton espace ma gueule');
                   this.loading = false;
                   this.saveToStorage();
                   this.http.get('https://neon-server.herokuapp.com/users').subscribe((users: Array<any>) => {
