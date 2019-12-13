@@ -257,8 +257,8 @@ display: none;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  width: 40%;
     // align-self: flex-end;
+    min-height: 90px;
 cursor: pointer;
 outline: none !important;
 }
@@ -712,6 +712,18 @@ margin: 10px;
 .yellow-selected {
     border: 2px solid #F4CC20;
 }
+.yellow-selected-detoure {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image:  url('../.././assets/detoure-selection.png') !important ;
+}
+.yellow-selected-standard {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image:  url('../.././assets/standard-selection.png') !important  ;
+}
 .mt3 {
   margin-top: 2.5%;
 }
@@ -723,7 +735,8 @@ margin: 10px;
 }
 
 .colorCont {
-  height: 50%;
+  padding-right: 2.5em;
+    padding-left: 2.5em;
 }
 .colorIcon {
   background-repeat: no-repeat;
@@ -833,8 +846,7 @@ input[type="checkbox"].ios-switch + div > div {
     -moz-transition-property: transform, background-color;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(0, 0, 0, 0.4);
     pointer-events: none;
-    margin-top: 1px;
-    margin-left: 1px;
+
 }
 
 label {
@@ -1056,10 +1068,19 @@ input[type="checkbox"].ios-switch:checked + div > div {
   .neon-wizard-header, h4 {
     font-size: 25px;
   }
-
+  .caca {
+    margin-bottom: 15px;
+  }
+.yellow-selected-detoure {
+  margin-bottom: 15px;
+}
+  .form-container {
+    margin-top: 100px;
+  }
   .step-container {
     min-height: 450px;
     margin-left: 20px;
+    padding: 1em;
   }
   .basic-input-text {
     height: 150px;
@@ -1069,6 +1090,9 @@ input[type="checkbox"].ios-switch:checked + div > div {
     height: 75px;
     font-size: 20px !important;
     width: 90%;
+    position: fixed;
+    z-index: 99;
+    top: 5px;
   }
   .basic-input-form {
     font-size: 14px;
@@ -1078,11 +1102,12 @@ input[type="checkbox"].ios-switch:checked + div > div {
   }
 
   .colorCont {
-    height: 75%;
+    height: 500px;
 }
 
 .colorIcon {  
-  width: 32%;
+
+  width: 45%;
 
 }
 

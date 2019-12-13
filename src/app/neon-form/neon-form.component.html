@@ -11,9 +11,9 @@
           <h4 class="neon-wizard-header flex1">Faîtes votre choix</h4>
   
           <div class="neon-wizard-btn-container  row flex3 ">  
-            <button type="button" class="form-btn col-md-3 col-sm-12" (click)="onCompleteStep(0, 'text', null)"
+            <button type="button" class="form-btn col-md-4 col-sm-12" (click)="onCompleteStep(0, 'text', null)"
               awNextStep>TEXTE</button>
-            <button type="button" class="form-btn col-md-3 col-sm-12" (click)="onCompleteStep(0, 'image', null)"
+            <button type="button" class="form-btn col-md-4 col-sm-12" (click)="onCompleteStep(0, 'image', null)"
               awNextStep>IMAGE</button>
           </div>
   
@@ -103,7 +103,7 @@
   
               
           <div  class="mt5 mb5 row colorCont">
-            <div  [ngClass]=" selectedColorUI=== i? ' yellow-selected col-3  col-sm-3 colorIcon' : '  col-3 col-sm-3 colorIcon'"   [style.backgroundImage]="'url('+ color.url +')'"   (click)="onSelectColor(color, i)" 
+            <div  [ngClass]=" selectedColorUI=== i? ' yellow-selected col-md-4  col-sm-6 colorIcon' : '  col-md-4 col-sm-6 colorIcon'"   [style.backgroundImage]="'url('+ color.url +')'"   (click)="onSelectColor(color, i)" 
             *ngFor="let color of colorList;  let i = index">
 
 
@@ -160,13 +160,13 @@
         </aw-wizard-step>
         <aw-wizard-step stepTitle="" class="col-md-6 col-sm-10  step-container">
           <h5 class="neon-wizard-header flex1 mb5">Choisissez votre support</h5>
-  
+          
           <div class="neon-wizard-btn-container row flex3 ">
-            <div  [style.backgroundImage]="'url('+ '../.././assets/img-support-detoure-19.png' +')'"   id='supportImg' [ngClass]=" imageSupportSelected==='détouré'? 'yellow-selected' : ''"
+            <div  [style.backgroundImage]="'url('+ '../.././assets/img-support-detoure-19.png' +')'"   id='supportImg' [ngClass]=" imageSupportSelected==='détouré'? 'yellow-selected-detoure col-md-6 col-sm-12' : 'col-md-6 col-sm-12 caca'"
              (click)="imageSupportSelected = 'détouré'" >
               </div>
   
-              <div  [style.backgroundImage]="'url('+ '../.././assets/img-support-standard-18.png' +')'"   id='supportImg'   [ngClass]=" imageSupportSelected==='standard'? 'yellow-selected' : ''"
+              <div  [style.backgroundImage]="'url('+ '../.././assets/img-support-standard-18.png' +')'"   id='supportImg'   [ngClass]=" imageSupportSelected==='standard'? 'yellow-selected-standard col-md-6 col-sm-12 ' : 'col-md-6 col-sm-12'"
               (click)="imageSupportSelected = 'standard'" >
             </div>
     
