@@ -40,7 +40,9 @@
     src:  url('./assets/fonts/TheSecret-Regular.ttf')  format('truetype');
   }
   
-  
+  button:disabled {
+    cursor: auto !important;
+  }
   
   .animation-circle {
     animation: rotate 2s linear infinite;
@@ -168,7 +170,6 @@
   
   .disabled {
     opacity: 0.5;
-    cursor: none !important;
   }
   
   // GRANDE FRONTIERE 

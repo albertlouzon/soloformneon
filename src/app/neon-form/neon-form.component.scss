@@ -45,6 +45,24 @@
     font-size: 3vw ;
 
   }
+.neon-wizard-descr-merci {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  font-family: Mukta-Regular, sans-serif;
+  text-align: center;
+  font-size: 17px;
+}
+  .neon-canvas2 {
+    // height: 85%;
+  min-height: 200px;
+    width: 100%;
+  margin-bottom: 15px;
+    // background-image: url('../../assets/outer-space-neon.jpg');
+    background-repeat:no-repeat;
+    display: flex;
+    background-position:center;
+    background-size: contain;
+  }
 
   .basic-input-form {
     overflow: hidden;
@@ -527,9 +545,7 @@ small {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.disabled {
-  cursor: auto;
-}
+
 
 .form-container {
     font-family: 'Nunito', sans-serif;
@@ -1062,6 +1078,9 @@ input[type="checkbox"].ios-switch:checked + div > div {
 
 
 @media screen and (max-width: 700px) {
+  .modal-window > div {
+    width: 100%;
+  }
   .forBigPussy {
     display: none;
   }

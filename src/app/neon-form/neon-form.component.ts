@@ -20,7 +20,7 @@ import {
   transition
 } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
-  
+
 export enum Direction {
   Next,
   Prev
@@ -45,18 +45,20 @@ export interface ActiveSlides {
   encapsulation: ViewEncapsulation.None
 })
 export class NeonFormComponent implements OnInit {
-  formatSizes: Array<{size: string, width: number, url: string}> = [{size: 'S', width: 20, url: '../.././assets/Fichier-S.png'
-},
-  {size: 'M', width: 25, url: '../.././assets/Fichier-M.png'},
-  {size: 'L', width: 30, url: '../.././assets/Fichier-L.png'},
-  {size: 'XL', width: 40, url: '../.././assets/Fichier-XL.png'} ];
+  formatSizes: Array<{ size: string, width: number, url: string }> = [{
+    size: 'S', width: 20, url: '../.././assets/Fichier-S.png'
+  },
+  { size: 'M', width: 25, url: '../.././assets/Fichier-M.png' },
+  { size: 'L', width: 30, url: '../.././assets/Fichier-L.png' },
+  { size: 'XL', width: 40, url: '../.././assets/Fichier-XL.png' }];
   selectedFormatSize = null;
   imageSupportSelected = null;
   projectType = null;
   userChoices = {};
-  userInfoPerso  =  {};
+  userInfoPerso = {};
   trim = String.prototype.trim;
   suceMaBite = ' créant votre espace !';
+  finalStep = false;
   signUp = true;
   styleSelected = null;
   signUpError = 'Il existe déjà un compte avec cet email...';
@@ -65,7 +67,7 @@ export class NeonFormComponent implements OnInit {
   neonColorCode = '';
   neonTypoClass = 'Billie';
   neonColorClass = '';
-  selectedColor ;
+  selectedColor;
   selectedTypo = 'TheAbsolute';
   imageFile = '';
   loading = false;
@@ -107,17 +109,17 @@ export class NeonFormComponent implements OnInit {
   ];
 
   colorList = [
-    {name: 'blancFroid' , color: '#ffffff', url: '../.././assets/blanc.png' },
-    {name: 'blancChaud' , color: '#ddcaaf', url: '../.././assets/blancChaud.png' },
-    {name: 'orange' , color: '#ffa42c', url: '../.././assets/orange.png' },
-    {name: 'jaune' , color: '#ffe600', url: '../.././assets/jaune.png' },
-    {name: 'rouge' , color: '#ff0000', url: '../.././assets/rouge.png' },
-    {name: 'rose' , color: '#ff73ff', url: '../.././assets/rose.png' },
-    {name: 'fuschia' , color: '#df29ff', url: '../.././assets/fuschia.png' },
-    {name: 'violet' , color: '#9527ff', url: '../.././assets/violet.png' },
-    {name: 'bleu' , color: '#337dff', url: '../.././assets/bleu.png' },
-    {name: 'vert' , color: '#15e81f', url: '../.././assets/vert.png' },
-    {name: 'turquoise' , color: '#17fff9', url: '../.././assets/turquoise.png' },
+    { name: 'blancFroid', color: '#ffffff', url: '../.././assets/blanc.png' },
+    { name: 'blanchaud', color: '#ddcaaf', url: '../.././assets/blanchaud.png' },
+    { name: 'orange', color: '#ffa42c', url: '../.././assets/orange.png' },
+    { name: 'jaune', color: '#ffe600', url: '../.././assets/jaune.png' },
+    { name: 'rouge', color: '#ff0000', url: '../.././assets/rouge.png' },
+    { name: 'rose', color: '#ff73ff', url: '../.././assets/rose.png' },
+    { name: 'fuschia', color: '#df29ff', url: '../.././assets/fuschia.png' },
+    { name: 'violet', color: '#9527ff', url: '../.././assets/violet.png' },
+    { name: 'bleu', color: '#337dff', url: '../.././assets/bleu.png' },
+    { name: 'vert', color: '#15e81f', url: '../.././assets/vert.png' },
+    { name: 'turquoise', color: '#17fff9', url: '../.././assets/turquoise.png' },
   ];
   @Input()
   isNavigationVisible = true;
@@ -167,7 +169,10 @@ export class NeonFormComponent implements OnInit {
 
   }
 
+  goToAcceuil() {
+    window.top.location.href = "https://www.dessinemoiunneon.fr";
 
+  }
   signuptrue() {
     this.userInfoPerso['password'] = '';
     this.userInfoPerso['name'] = '';
@@ -182,22 +187,22 @@ export class NeonFormComponent implements OnInit {
 
     this.signUp = !this.signUp;
   }
-onSelectColor(color, index) {
-  this.neonColorClass = color['name'];
-  this.neonColorCode = color['color'];
-  this.selectedColorUI = index;
-  this.selectedColor = color['name'] + ' / ' + color['color'];
-  this.colorTitle = 'Couleur selectionnée:  ';
-}
+  onSelectColor(color, index) {
+    this.neonColorClass = color['name'];
+    this.neonColorCode = color['color'];
+    this.selectedColorUI = index;
+    this.selectedColor = color['name'] + ' / ' + color['color'];
+    this.colorTitle = 'Couleur selectionnée:  ';
+  }
   onChangeTextTitle(value: string) {
-      this.textInput = value;
+    this.textInput = value;
   }
   onSelectFile(event) {
-    console.log('file selected' , event);
+    console.log('file selected', event);
     if (event.target.files) {
-      console.log('file selected' , event.target.files);
+      console.log('file selected', event.target.files);
       this.textInput = event.target.files[0]['name'];
-      this.imageFile =  event.target.files[0];
+      this.imageFile = event.target.files[0];
     }
   }
   onChangeAdditionnalInfo(value: string) {
@@ -206,17 +211,27 @@ onSelectColor(color, index) {
     }
   }
 
- 
+  manageFinalStep() {
+    this.finalStep = true
+    // if(this.projectType === null) {
+    //   this.projectType === 'consumer'
+    // }
+    this.loading = false;
+  }
+
+  exitForm() {
+
+  }
   async onSubmitForm() {
-    const payload: Array<{title: string, data: {}}> = [];
+    const payload: Array<{ title: string, data: {} }> = [];
     if (this.mainChoice === 'text') {
-      payload.push({title: this.mainChoice, data: {value: this.textInput, style: this.styleSelected}});
-      payload.push({title: 'format', data: {size: this.formatSizes[this.selectedFormatSize], imageSupport: this.imageSupportSelected}});
+      payload.push({ title: this.mainChoice, data: { value: this.textInput, style: this.styleSelected } });
+      payload.push({ title: 'format', data: { size: this.formatSizes[this.selectedFormatSize], imageSupport: this.imageSupportSelected } });
 
 
     } else {
-      payload.push({title: this.mainChoice, data: {file: this.imageFile, info: this.imageAdditionalInfo}});
-      payload.push({title: 'format', data: {size: this.formatSizes[this.selectedFormatSize], imageSupport: this.imageSupportSelected}});
+      payload.push({ title: this.mainChoice, data: { file: this.imageFile, info: this.imageAdditionalInfo } });
+      payload.push({ title: 'format', data: { size: this.formatSizes[this.selectedFormatSize], imageSupport: this.imageSupportSelected } });
 
     }
 
@@ -224,7 +239,7 @@ onSelectColor(color, index) {
     for (const field in this.userInfoPerso) {
       data[field] = this.userInfoPerso[field];
     }
-    payload.push({title: this.projectType, data: {data}});
+    payload.push({ title: this.projectType, data: { data } });
     const commandPayload = {
       text: this.textInput,
       typo: this.selectedTypo,
@@ -237,9 +252,9 @@ onSelectColor(color, index) {
       type: this.projectType
     };
 
- 
+
     if (localStorage.getItem('email') === null) {
-      if ((this.userInfoPerso['email'] || this.userInfoPerso['password']) && (this.userInfoPerso['email'].trim() !== '' || this.userInfoPerso['password'].trim() !== '') ) {
+      if ((this.userInfoPerso['email'] || this.userInfoPerso['password']) && (this.userInfoPerso['email'].trim() !== '' || this.userInfoPerso['password'].trim() !== '')) {
         this.loginFailed = false;
         this.loading = true;
         this.getUser().subscribe((allUsers: Array<any>) => {
@@ -249,43 +264,43 @@ onSelectColor(color, index) {
               this.loginFailed = true;
               const userId = allUsers.find(x => x['email'] === this.userInfoPerso['email']).id;
               this.signUpError = 'Il existe déjà un compte avec cet email...';
-              if(this.mainChoice === 'image') {
-                if(this.imageFile) {
+              if (this.mainChoice === 'image') {
+                if (this.imageFile) {
                   commandPayload['clientImageUrl'] = '';
-                          console.log('sending image CaaaaaaC', userId);
-                    
-                    const params = new HttpParams().set('userId', userId)// Create new HttpParams
-                    const formData: FormData = new FormData();
-                    formData.append('file', this.imageFile);
-                      this.http.post('https://neon-server.herokuapp.com/clientFileUpload', formData, {params: params}).subscribe((url) => {
-                      console.log('sucess URL:' , url);
-                      commandPayload['clientImageUrl'] = url;
-                      return url;
-                    }, err =>{
-                      if(err['status'] === 200) {
-                        
-                      }
-                    });
-                }   else {
+                  console.log('sending image CaaaaaaC', userId);
+
+                  const params = new HttpParams().set('userId', userId)// Create new HttpParams
+                  const formData: FormData = new FormData();
+                  formData.append('file', this.imageFile);
+                  this.http.post('https://neon-server.herokuapp.com/clientFileUpload', formData, { params: params }).subscribe((url) => {
+                    console.log('sucess URL:', url);
+                    commandPayload['clientImageUrl'] = url;
+                    return url;
+                  }, err => {
+                    if (err['status'] === 200) {
+
+                    }
+                  });
+                } else {
                   alert('vous devez choisir une image')
                 }
                 this.sleep(1000);
-          
-            }
-            console.log('upload file finished', commandPayload['clientImageUrl'])
-          
-              this.http.post(  `https://neon-server.herokuapp.com/users/${userId}/command`, commandPayload).subscribe((newNeonList: any) => {
+
+              }
+              console.log('upload file finished', commandPayload['clientImageUrl'])
+
+              this.http.post(`https://neon-server.herokuapp.com/users/${userId}/command`, commandPayload).subscribe((newNeonList: any) => {
                 console.log('updated list after post :', newNeonList);
                 this.saveToStorage();
-                this.goToEC();
+                this.manageFinalStep();
                 console.log('debu 4');
 
               }, err => {
-                if (err.status === 201 || err.status === 200 ) {
+                if (err.status === 201 || err.status === 200) {
                   console.log('debu 5');
 
                   this.saveToStorage();
-                  this.goToEC();
+                  this.manageFinalStep();
                 }
               });
             } else {
@@ -299,50 +314,50 @@ onSelectColor(color, index) {
                   this.allUsers = users;
                   this.saveToStorage();
                   const userId = this.allUsers.find(x => x.email === this.userInfoPerso['email']).id;
-                  if(this.mainChoice === 'image') {
-                    if(this.imageFile) {
+                  if (this.mainChoice === 'image') {
+                    if (this.imageFile) {
                       commandPayload['clientImageUrl'] = '';
-                              console.log('sending image CaaaaaaC', userId);
-                        
-                        const params = new HttpParams().set('userId', userId)// Create new HttpParams
-                        const formData: FormData = new FormData();
-                        formData.append('file', this.imageFile);
-                          this.http.post('https://neon-server.herokuapp.com/clientFileUpload', formData, {params: params}).subscribe((url) => {
-                          console.log('sucess URL:' , url);
-                          commandPayload['clientImageUrl'] = url;
-                          return url;
-                        }, err => console.log('err' , err));
-                    }   else {
+                      console.log('sending image CaaaaaaC', userId);
+
+                      const params = new HttpParams().set('userId', userId)// Create new HttpParams
+                      const formData: FormData = new FormData();
+                      formData.append('file', this.imageFile);
+                      this.http.post('https://neon-server.herokuapp.com/clientFileUpload', formData, { params: params }).subscribe((url) => {
+                        console.log('sucess URL:', url);
+                        commandPayload['clientImageUrl'] = url;
+                        return url;
+                      }, err => console.log('err', err));
+                    } else {
                       alert('vous devez choisir une image')
                     }
                     this.sleep(1000);
-              
-                }
-                console.log('upload file finished', commandPayload['clientImageUrl'])
-                  this.http.post(  `https://neon-server.herokuapp.com/users/${userId}/command`, commandPayload).subscribe((newNeonList: any) => {
+
+                  }
+                  console.log('upload file finished', commandPayload['clientImageUrl'])
+                  this.http.post(`https://neon-server.herokuapp.com/users/${userId}/command`, commandPayload).subscribe((newNeonList: any) => {
                     console.log('updated list after post :', newNeonList);
 
-                    if (this.projectType === 'consumer') {
-                      this.saveToStorage();
-                      this.goToEC();
-                      console.log('debu 4');
-                    }
+
+                    this.saveToStorage();
+                    this.manageFinalStep();
+                    console.log('debu 4');
+
 
                   }, err => {
-                    if (err.status === 201 || err.status === 200 ) {
+                    if (err.status === 201 || err.status === 200) {
 
-                      if (this.projectType === 'consumer') {
-                        this.saveToStorage();
-                        this.goToEC();
-                        console.log('debu 4');
-                      }
+
+                      this.saveToStorage();
+                      this.manageFinalStep();
+                      console.log('debu 4');
+
 
                     }
                   });
                 });
 
               }, err => {
-                if (err.status === 201 || err.status === 200 )  {
+                if (err.status === 201 || err.status === 200) {
                   console.log('debu 6');
 
                   this.loading = false;
@@ -350,44 +365,41 @@ onSelectColor(color, index) {
                   this.http.get('https://neon-server.herokuapp.com/users').subscribe((users: Array<any>) => {
                     this.allUsers = users;
                     const userId = this.allUsers.find(x => x.email === this.userInfoPerso['email']).id;
-                    if(this.mainChoice === 'image') {
-                      if(this.imageFile) {
+                    if (this.mainChoice === 'image') {
+                      if (this.imageFile) {
                         commandPayload['clientImageUrl'] = '';
-                                console.log('sending image CaaaaaaC', userId);
-                          
-                          const params = new HttpParams().set('userId', userId)// Create new HttpParams
-                          const formData: FormData = new FormData();
-                          formData.append('file', this.imageFile);
-                            this.http.post('https://neon-server.herokuapp.com/clientFileUpload', formData, {params: params}).subscribe((url) => {
-                            console.log('sucess URL:' , url);
-                            commandPayload['clientImageUrl'] = url;
-                            return url;
-                          }, err => console.log('err' , err));
-                      }   else {
+                        console.log('sending image CaaaaaaC', userId);
+
+                        const params = new HttpParams().set('userId', userId)// Create new HttpParams
+                        const formData: FormData = new FormData();
+                        formData.append('file', this.imageFile);
+                        this.http.post('https://neon-server.herokuapp.com/clientFileUpload', formData, { params: params }).subscribe((url) => {
+                          console.log('sucess URL:', url);
+                          commandPayload['clientImageUrl'] = url;
+                          return url;
+                        }, err => console.log('err', err));
+                      } else {
                         alert('vous devez choisir une image')
                       }
                       this.sleep(1000);
-                
-                  }
-                  console.log('upload file finished', commandPayload['clientImageUrl'])
-                    this.http.post(  `https://neon-server.herokuapp.com/users/${userId}/command`, commandPayload).subscribe((newNeonList: any) => {
+
+                    }
+                    console.log('upload file finished', commandPayload['clientImageUrl'])
+                    this.http.post(`https://neon-server.herokuapp.com/users/${userId}/command`, commandPayload).subscribe((newNeonList: any) => {
                       console.log('updated list after post :', newNeonList);
 
-                    if (this.projectType === 'consumer') {
+                      this.saveToStorage();
+                      this.manageFinalStep();
 
-                      this.goToEC();
-                    }
 
 
                     }, err => {
-                      if (err.status === 201 || err.status === 200 ) {
+                      if (err.status === 201 || err.status === 200) {
                         console.log('debu 7');
 
 
-                        if (this.projectType === 'consumer') {
-
-                          this.goToEC();
-                        }
+                        this.saveToStorage();
+                        this.manageFinalStep();
 
                       }
                     });
@@ -406,37 +418,41 @@ onSelectColor(color, index) {
     } else {
       console.log('debu 8', localStorage.getItem('email'));
 
-    const userId = this.allUsers.find(x => x.email === localStorage.getItem('email')).id;
-    if(this.mainChoice === 'image') {
-      if(this.imageFile) {
-        commandPayload['clientImageUrl'] = '';
-                console.log('sending image CaaaaaaC', userId);
-          
+      const userId = this.allUsers.find(x => x.email === localStorage.getItem('email')).id;
+      if (this.mainChoice === 'image') {
+        if (this.imageFile) {
+          commandPayload['clientImageUrl'] = '';
+          console.log('sending image CaaaaaaC', userId);
+
           const params = new HttpParams().set('userId', userId)// Create new HttpParams
           const formData: FormData = new FormData();
           formData.append('file', this.imageFile);
-            this.http.post('https://neon-server.herokuapp.com/clientFileUpload', formData, {params: params}).subscribe((url) => {
-            console.log('sucess URL:' , url);
+          this.http.post('https://neon-server.herokuapp.com/clientFileUpload', formData, { params: params }).subscribe((url) => {
+            console.log('sucess URL:', url);
             commandPayload['clientImageUrl'] = url;
             return url;
-          }, err => console.log('err' , err));
-      }   else {
-        alert('vous devez choisir une image')
-      }
-      this.sleep(1000);
+          }, err => console.log('err', err));
+        } else {
+          alert('vous devez choisir une image')
+        }
+        this.sleep(1000);
 
-  }
-  console.log('upload file finished', commandPayload['clientImageUrl'])
-    this.http.post(  `https://neon-server.herokuapp.com/users/${userId}/command`, commandPayload).subscribe((newNeonList: any) => {
-      console.log('updated list after post :', newNeonList);
-      this.goToEC();
-
-    }, err => {
-      if (err.status === 201 || err.status === 200 ) {
-        console.log('debu 9   ');
-        this.goToEC();
       }
-    });
+      console.log('upload file finished', commandPayload['clientImageUrl'])
+      this.http.post(`https://neon-server.herokuapp.com/users/${userId}/command`, commandPayload).subscribe((newNeonList: any) => {
+        console.log('updated list after post :', newNeonList);
+
+        this.saveToStorage();
+        this.manageFinalStep();
+
+      }, err => {
+        if (err.status === 201 || err.status === 200) {
+          console.log('debu 9   ');
+
+          this.saveToStorage();
+          this.manageFinalStep();
+        }
+      });
     }
 
 
@@ -445,7 +461,7 @@ onSelectColor(color, index) {
   sleep(milliseconds) {
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
-      if ((new Date().getTime() - start) > milliseconds){
+      if ((new Date().getTime() - start) > milliseconds) {
         break;
       }
     }
@@ -475,7 +491,7 @@ onSelectColor(color, index) {
 
       }
 
-            if (localStorage.getItem('email')) {
+      if (localStorage.getItem('email')) {
         this.loading = true;
         const commandPayload = {
           text: this.textInput,
@@ -490,68 +506,50 @@ onSelectColor(color, index) {
         };
 
         console.log('upload file finished', commandPayload['clientImageUrl'])
-    const userId = this.allUsers.find(x => x.email === localStorage.getItem('email')).id;
-    if(this.mainChoice === 'image') {
-      if(this.imageFile) {
-        commandPayload['clientImageUrl'] = '';
-                console.log('sending image CaaaaaaC', userId);
-          
-          const params = new HttpParams().set('userId', userId)// Create new HttpParams
-          const formData: FormData = new FormData();
-          formData.append('file', this.imageFile);
-            this.http.post('https://neon-server.herokuapp.com/clientFileUpload', formData, {params: params}).subscribe((url) => {
-            console.log('sucess URL:' , url);
-            commandPayload['clientImageUrl'] = url;
-            return url;
-          }, err => console.log('err' , err));
-      }   else {
-        alert('vous devez choisir une image')
-      }
-      this.sleep(1000);
+        const userId = this.allUsers.find(x => x.email === localStorage.getItem('email')).id;
+        if (this.mainChoice === 'image') {
+          if (this.imageFile) {
+            commandPayload['clientImageUrl'] = '';
+            console.log('sending image CaaaaaaC', userId);
 
-  }
-  console.log('upload file finished', commandPayload['clientImageUrl'])
-    this.http.post(  `https://neon-server.herokuapp.com/users/${userId}/command`, commandPayload).subscribe((newNeonList: any) => {
-      console.log('updated list after post :', newNeonList);
-      this.goToEC();
+            const params = new HttpParams().set('userId', userId)// Create new HttpParams
+            const formData: FormData = new FormData();
+            formData.append('file', this.imageFile);
+            this.http.post('https://neon-server.herokuapp.com/clientFileUpload', formData, { params: params }).subscribe((url) => {
+              console.log('sucess URL:', url);
+              commandPayload['clientImageUrl'] = url;
+              return url;
+            }, err => console.log('err', err));
+          } else {
+            alert('vous devez choisir une image')
+          }
+          this.sleep(1000);
 
-    }, err => {
-      if (err.status === 201 || err.status === 200 ) {
-        console.log('debu 9   ');
-        this.goToEC();
-      }
-    });
-        // this.getUser().subscribe((allUsers: Array<any>) => {
-        //   this.loginFailed = true;
-        //   const userId = allUsers.find(x => x['email'] ===localStorage.getItem('email')).id
-        //   this.signUpError = 'Il existe déjà un compte avec cet email...';
-        //   this.http.post(  `https://neon-server.herokuapp.com/users/${userId}/command`, commandPayload).subscribe((newNeonList: any) => {
-        //     console.log('updated list after post :', newNeonList);
-        //     this.saveToStorage();
-        //     currentView.caca = 'client';
-        //     console.log('debu 4');
-
-        //   }, err => {
-        //     if(err.status === 201 || err.status === 200 ) {
-        //       console.log('debu 5');
-
-        //       this.saveToStorage();
-        //       currentView.caca = 'client';
-        //     }
-        //   })
-        // })
+        }
+        console.log('upload file finished', commandPayload['clientImageUrl'])
+        this.http.post(`https://neon-server.herokuapp.com/users/${userId}/command`, commandPayload).subscribe((newNeonList: any) => {
+          console.log('updated list after post :', newNeonList);
+          this.manageFinalStep();
+          this.saveToStorage();
+        }, err => {
+          if (err.status === 201 || err.status === 200) {
+            console.log('debu 9   ');
+            this.manageFinalStep();
+            this.saveToStorage();
+          }
+        });
       }
 
     }
     if (choice && step === 5) {
       if (choice !== this.projectType) {
-          this.userInfoPerso = {};
+        this.userInfoPerso = {};
       }
       this.projectType = choice;
 
 
     }
-    console.log('step ', step, ' completed. The user chose ', choice, '... data to save: ',  this.projectType);
+    console.log('step ', step, ' completed. The user chose ', choice, '... data to save: ', this.projectType);
 
   }
 
@@ -564,14 +562,14 @@ onSelectColor(color, index) {
   signUpObs() {
     const headers = new HttpHeaders({ 'content-type': 'application/json', 'Accept': 'application/json' });
     const password = this.projectType === 'consumer' ? this.userInfoPerso['password'] : this.userInfoPerso['société'];
-     const payload = {
+    const payload = {
       email: this.userInfoPerso['email'],
       password: password,
       name: this.userInfoPerso['name'],
       nickname: this.userInfoPerso['nickname'],
       type: this.projectType
-     };
-    return this.http.post('https://neon-server.herokuapp.com/users',  payload, {headers: headers});
+    };
+    return this.http.post('https://neon-server.herokuapp.com/users', payload, { headers: headers });
   }
 
   getUser() {
@@ -581,8 +579,13 @@ onSelectColor(color, index) {
 
 
   saveToStorage() {
-    localStorage.setItem('email', this.userInfoPerso['email']);
-    localStorage.setItem('pw', this.userInfoPerso['password']);
+    if(this.userInfoPerso['email'] && this.userInfoPerso['email'].trim() !== '') {
+      localStorage.setItem('email', this.userInfoPerso['email']);
+
+    }
+    if(this.userInfoPerso['password'] && this.userInfoPerso['password'].trim() !== '') {
+      localStorage.setItem('pw', this.userInfoPerso['password']);
+    }
   }
 
   select(index: number): void {
