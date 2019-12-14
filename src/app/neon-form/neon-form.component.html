@@ -1,6 +1,6 @@
 <div class='form-container'>
-    <input   autocomplete="off" (keyup)="onChangeTextTitle($event.target.value)" [(value)]="textInput"  maxlength="35" [className]="neonColorClass + ' dynamicNeonTitle ' + neonTypoClass "
-     style="align-self: center; text-align: center; letter-spacing: 2px;"  *ngIf="userChoices[0] === 'text' && userChoices[3] === 'typo' " >
+    <textarea onlyGrow='true'  autosize   autocomplete="off" (keyup)="onChangeTextTitle($event.target.value)" [(value)]="textInput" [className]="neonColorClass + ' dynamicNeonTitle ' + neonTypoClass "
+     style="align-self: center; text-align: center; letter-spacing: 2px;"  *ngIf="userChoices[0] === 'text' && userChoices[3] === 'typo' " ></textarea>
         <!-- <h2   [className]="neonColorClass + ' ' + neonTypoClass " style="align-self: center; text-align: center; letter-spacing: 2px; width: 100%;" >{{textInput}}</h2> -->
   
   
@@ -24,7 +24,7 @@
             <div class="neon-wizard-header">
               <h5>Ecrivez votre texte</h5>
             </div>
-            <input    #mainInput  autocomplete="off" file='text' (keyup)="onChangeTextTitle($event.target.value)" placeholder="" maxlength="35" [(value)]="textInput"
+            <input    #mainInput  autocomplete="off" file='text' (keyup)="onChangeTextTitle($event.target.value)" placeholder="" [(value)]="textInput"
               class="basic-input-text mb5  mt5" />
   
           </div>

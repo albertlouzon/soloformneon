@@ -66,10 +66,10 @@ export class NeonFormComponent implements OnInit, AfterViewChecked {
   loginFailed = false;
   textInput = '';
   neonColorCode = '';
-  neonTypoClass = 'Billie';
+  neonTypoClass = 'Lilly';
   neonColorClass = '';
   selectedColor;
-  selectedTypo = 'TheAbsolute';
+  selectedTypo = 'Lilly';
   imageFile = '';
   loading = false;
   mainChoice = '';
@@ -80,32 +80,40 @@ export class NeonFormComponent implements OnInit, AfterViewChecked {
   colorTitle = 'Choisissez une couleur';
   slides = [
     {
-      url: '../.././assets/Billie-16.png',
-      font: 'Billie'
+      url: '../.././assets/Lilly.png',
+      font: 'Lilly'
     },
     {
-      url: '../.././assets/Cobby-16.png',
-      font: 'Cobby'
+      url: '../.././assets/Dannie.png',
+      font: 'Dannie'
     },
     {
-      url: '../.././assets/Jackie-16.png',
-      font: 'Jackie'
+      url: '../.././assets/Galsy.png',
+      font: 'Galsy'
     },
     {
-      url: '../.././assets/Jerry-16.png',
-      font: 'Jerry'
+      url: '../.././assets/Billy.png',
+      font: 'Billy'
     },
     {
-      url: '../.././assets/Jimmy-16.png',
+      url: '../.././assets/Polly.png',
+      font: 'Polly'
+    },
+    {
+      url: '../.././assets/Jimmy.png',
       font: 'Jimmy'
     },
     {
-      url: '../.././assets/Johnny-16.png',
-      font: 'Johnny'
+      url: '../.././assets/Cobby.png',
+      font: 'Cobby'
     },
     {
-      url: '../.././assets/Perrie-16.png',
-      font: 'Perrie'
+      url: '../.././assets/Tommy.png',
+      font: 'Tommy'
+    },
+    {
+      url: '../.././assets/Freddy.png',
+      font: 'Freddy'
     },
   ];
 

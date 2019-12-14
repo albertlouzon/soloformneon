@@ -13,30 +13,30 @@
   }
 
 
-  .Jerry {
-    font-family: Jerry, sans-serif !important;
+  .Tommy {
+    font-family: Tommy, sans-serif !important;
     font-size: 4vw ;
+  }
+  .Freddy {
+    font-family: Freddy, sans-serif !important;
+    font-size: 3vw ;
   }
   .Jackie {
     font-family: Jackie, sans-serif !important;
     font-size: 3vw ;
+
   }
   .Cobby {
     font-family: Cobby, sans-serif !important;
     font-size: 3vw ;
 
   }
-  .Johnny {
-    font-family: Johnny, sans-serif !important;
-    font-size: 3vw ;
+  .Dannie {
+    font-family: Dannie, sans-serif !important;    font-size: 3vw !important;
 
   }
-  .Perrie {
-    font-family: Perrie, sans-serif !important;    font-size: 3vw !important;
-
-  }
-  .Billie {
-    font-family: Billie, sans-serif !important;
+  .Billy {
+    font-family: Billy, sans-serif !important;
     font-size: 3vw ;
 
   }
@@ -44,6 +44,20 @@
     font-family: Jimmy, sans-serif !important;
     font-size: 3vw ;
 
+  }
+  .Lilly {
+    font-family: Lilly, sans-serif !important;
+    font-size: 3vw ;
+
+  }
+  .Polly {
+    font-family: Polly, sans-serif !important;
+    font-size: 3vw ;
+
+  }
+  .Galsy {
+    font-family: Galsy, sans-serif !important;
+    font-size: 3vw ;
   }
 .neon-wizard-descr-merci {
   margin-top: 5%;
@@ -541,7 +555,7 @@ aw-wizard-navigation-bar.horizontal.small ul.steps-indicator li .step-indicator 
   padding-top: 0.5%;
   background-color: white;
   margin-right: 1%;
-    width: 49%;
+    // width: 49%;
   outline: none !important;
   /* height: 168px; */
   font-size: 3vw;
@@ -551,7 +565,7 @@ aw-wizard-navigation-bar.horizontal.small ul.steps-indicator li .step-indicator 
   display: flex;
   /* top: 10%; */
   border-radius: 15px;
-  height: 100px;
+  // height: 100px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -1116,9 +1130,9 @@ input[type="checkbox"].ios-switch:checked + div > div {
     font-size: 20px;
   }
   .dynamicNeonTitle {
-    height: 75px;
+    // height: 75px;
     font-size: 20px !important;
-    width: 90%;
+    // width: 90%;
     position: fixed;
     z-index: 99;
     top: 5px;

@@ -6,6 +6,7 @@ import { NeonFormComponent } from './neon-form/neon-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ArchwizardModule } from 'angular-archwizard';
 import {FormsModule} from '@angular/forms';
+import {AutosizeModule} from 'ngx-autosize';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {FormsModule} from '@angular/forms';
     BrowserModule,
     HttpClientModule,
     ArchwizardModule,
-    FormsModule
+    FormsModule,
+    AutosizeModule
 
   ],
   entryComponents: [NeonFormComponent],
