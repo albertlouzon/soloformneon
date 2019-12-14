@@ -516,12 +516,22 @@ small {
 	padding: 0;
 	box-sizing: border-box;
 }
-
-
+aw-wizard-navigation-bar.horizontal.small ul.steps-indicator li.done .step-indicator {
+  background-color: #F4CC20 !important;
+}
+aw-wizard.horizontal {
+  flex-direction: column-reverse !important;
+}
+aw-wizard-navigation-bar.horizontal.small ul.steps-indicator li.current .step-indicator {
+  background-color: #000B31;
+}
+aw-wizard-navigation-bar.horizontal.small ul.steps-indicator li .step-indicator {
+  background-color: #000B31;
+}
 .steps-indicator {
   // position: absolute !important;
   // top: 60% !important;
-  display: none !important;
+  // display: none !important;
 }
 
 .dynamicNeonTitle {

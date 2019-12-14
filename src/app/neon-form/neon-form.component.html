@@ -1,5 +1,5 @@
 <div class='form-container'>
-    <input autocomplete="off" (keyup)="onChangeTextTitle($event.target.value)" [(value)]="textInput"  maxlength="35" [className]="neonColorClass + ' dynamicNeonTitle ' + neonTypoClass "
+    <input   autocomplete="off" (keyup)="onChangeTextTitle($event.target.value)" [(value)]="textInput"  maxlength="35" [className]="neonColorClass + ' dynamicNeonTitle ' + neonTypoClass "
      style="align-self: center; text-align: center; letter-spacing: 2px;"  *ngIf="userChoices[0] === 'text' && userChoices[3] === 'typo' " >
         <!-- <h2   [className]="neonColorClass + ' ' + neonTypoClass " style="align-self: center; text-align: center; letter-spacing: 2px; width: 100%;" >{{textInput}}</h2> -->
   
@@ -24,7 +24,7 @@
             <div class="neon-wizard-header">
               <h5>Ecrivez votre texte</h5>
             </div>
-            <input autocomplete="off" file='text' (keyup)="onChangeTextTitle($event.target.value)" placeholder="" maxlength="35" [(value)]="textInput"
+            <input    #mainInput  autocomplete="off" file='text' (keyup)="onChangeTextTitle($event.target.value)" placeholder="" maxlength="35" [(value)]="textInput"
               class="basic-input-text mb5  mt5" />
   
           </div>
@@ -103,12 +103,12 @@
   
               
           <div  class="mt5 mb5 row colorCont">
-            <div  [ngClass]=" selectedColorUI=== i? ' yellow-selected col-md-4  col-sm-6 colorIcon' : '  col-md-4 col-sm-6 colorIcon'"   [style.backgroundImage]="'url('+ color.url +')'"   (click)="onSelectColor(color, i)" 
+            <div  [ngClass]=" selectedColorUI=== i? ' yellow-selected col-md-3  col-sm-6 colorIcon' : '  col-md-3 col-sm-6 colorIcon'"   [style.backgroundImage]="'url('+ color.url +')'"   (click)="onSelectColor(color, i)" 
             *ngFor="let color of colorList;  let i = index">
 
 
             <!-- <div class=format-subtitle>{{format.width}}</div>  -->
-          </div>
+          </div>  
     
             </div>
               <!-- <ul id="flexible">
@@ -162,11 +162,11 @@
           <h5 class="neon-wizard-header flex1 mb5">Choisissez votre support</h5>
           
           <div class="neon-wizard-btn-container row flex3 ">
-            <div  [style.backgroundImage]="'url('+ '../.././assets/img-support-detoure-19.png' +')'"   id='supportImg' [ngClass]=" imageSupportSelected==='détouré'? 'yellow-selected-detoure col-md-6 col-sm-12' : 'col-md-6 col-sm-12 caca'"
+            <div  [style.backgroundImage]="'url('+ '../.././assets/img-support-detoure-19.png' +')'"   id='supportImg' [ngClass]=" imageSupportSelected==='détouré'? 'yellow-selected-detoure col-md-5 col-sm-12' : 'col-md-5 col-sm-12 caca'"
              (click)="imageSupportSelected = 'détouré'" >
               </div>
   
-              <div  [style.backgroundImage]="'url('+ '../.././assets/img-support-standard-18.png' +')'"   id='supportImg'   [ngClass]=" imageSupportSelected==='standard'? 'yellow-selected-standard col-md-6 col-sm-12 ' : 'col-md-6 col-sm-12'"
+              <div  [style.backgroundImage]="'url('+ '../.././assets/img-support-standard-18.png' +')'"   id='supportImg'   [ngClass]=" imageSupportSelected==='standard'? 'yellow-selected-standard col-md-5 col-sm-12 ' : 'col-md-5 col-sm-12'"
               (click)="imageSupportSelected = 'standard'" >
             </div>
     

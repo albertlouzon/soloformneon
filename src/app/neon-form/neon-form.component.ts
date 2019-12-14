@@ -10,7 +10,8 @@ import {
   ChangeDetectorRef,
   KeyValueDiffer,
   KeyValueDiffers,
-  Inject
+  Inject,
+  AfterContentChecked, Directive, ElementRef, ViewChild, AfterViewChecked
 } from '@angular/core';
 import {
   trigger,
@@ -44,7 +45,7 @@ export interface ActiveSlides {
   styleUrls: ['./neon-form.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class NeonFormComponent implements OnInit {
+export class NeonFormComponent implements OnInit, AfterViewChecked {
   formatSizes: Array<{ size: string, width: number, url: string }> = [{
     size: 'S', width: 20, url: '../.././assets/Fichier-S.png'
   },
@@ -135,7 +136,10 @@ export class NeonFormComponent implements OnInit {
   thumbnailTemplateRef: TemplateRef<any>;
   currentInterval;
   differ: KeyValueDiffer<ActiveSlides, any>;
-
+  @ViewChild("mainInput",  {static: false}) mainInp: ElementRef;
+  editName() {
+      this.mainInp.nativeElement.focus();
+  }
   private _direction: Direction = Direction.Next;
   get direction() {
     return this._direction;
@@ -162,6 +166,10 @@ export class NeonFormComponent implements OnInit {
       this.activeSlides = this.getPreviousCurrentNextIndexes(0);
       this.differ = this.differs.find(this.activeSlides).create();
     }
+  }
+
+  ngAfterViewChecked() {
+    // this.mainInp.nativeElement.focus();
   }
 
   goToEC() {
@@ -191,7 +199,7 @@ export class NeonFormComponent implements OnInit {
     this.neonColorClass = color['name'];
     this.neonColorCode = color['color'];
     this.selectedColorUI = index;
-    this.selectedColor = color['name'] + ' / ' + color['color'];
+    this.selectedColor = color['name'];
     this.colorTitle = 'Couleur selectionnée:  ';
   }
   onChangeTextTitle(value: string) {
@@ -471,9 +479,17 @@ export class NeonFormComponent implements OnInit {
       if (choice !== this.mainChoice) {
         this.textInput = '';
       }
+      if(choice === 'text') {
+        setTimeout(() => {
+          this.mainInp.nativeElement.focus();
+  
+        }, 200);
+  
+      }
       this.mainChoice = choice;
       this.userChoices[step] = choice;
     }
+  
     if (step === 3) {
       if (choice === 'erase') {
         this.userChoices[step] = null;
